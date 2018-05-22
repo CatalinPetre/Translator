@@ -1,0 +1,25 @@
+import urllib
+import requests
+
+
+main_api = 'https://glosbe.com/gapi/translate?from=deu&dest=eng&format=json&tm=false&'
+#main_api = 'http://maps.googleapis.com/maps/api/geocode/json?'
+
+phrase = 'Frau'
+address = 'Der Mann trinkt Wasser'
+
+url = main_api + urllib.parse.urlencode({'phrase': phrase})
+#url = main_api + urllib.parse.urlencode({'address': address})
+
+
+print(url)
+json_data = requests.get(url).json()
+#print(json_data)
+
+json_result = json_data['result']
+translated_phrase = json_data['tuc'][0]['phrase']['text']
+
+
+print('The API result is ' + json_result)
+
+print('Translation for ' + '"' + phrase + '" is ' + '"' + translated_phrase + '"')
